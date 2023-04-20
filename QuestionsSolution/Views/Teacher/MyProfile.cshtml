@@ -1,0 +1,155 @@
+﻿@using QuestionsSolution.Models
+@model List<Teacher>
+@{
+    ViewBag.Title = "MyProfile";
+    Layout = "~/Views/Shared/_Layout - Teacher.cshtml";
+}
+
+
+<body onload="kapat()">
+    @foreach (var x in Model)
+    {
+        <div class="col-xs-6 col-md-12 sidebar" id="sidebar">
+            <div class="sidebar-title for-tablet">Sidebar</div>
+            @if (@TempData["TempData"] != null)
+            {
+                <div id="dv1" class="alert alert-success">
+                    <strong style="font-size:15px;">@TempData["TempData"]</strong>
+
+                </div>}
+            <aside>
+                <div class="aside-body">
+                    <div class="featured-author">
+                        <div class="featured-author-inner">
+                            <div class="featured-author-cover" style="background-image: url('../../Content/Style/İmages/arkaplan.jpg'); ">
+
+                                @*<div class="badges">
+                                        <div class="badge-item"><i class="ion-star"></i> Featured</div>
+                                    </div>*@
+                                <div class="featured-author-center">
+                                    <figure class="featured-author-picture">
+                                        <img src="~/Content/Style/İmages/anonim.png" alt="Sample Article">
+                                    </figure>
+                                    <div class="featured-author-info">
+                                        <h2 class="name">@x.Name @x.Surname</h2>
+                                        <div class="desc">@x.Mail</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="featured-author-body">
+                                <div class="featured-author-count">
+                                    <div class="item">
+                                        <a href="#">
+                                            <div class="name">Verilen Cevap Sayısı</div>
+                                            <div class="value">@ViewBag.answer</div>
+                                        </a>
+                                    </div>
+                                    <div class="item">
+                                        <a href="#">
+                                            <div class="name">Öğretmen Kullanıcı Seviyesi</div>
+                                            @if (x.Point < 50)
+                                            {
+                                                <div class="value">Çırak</div>
+                                            }
+                                            @if (50< x.Point && x.Point< 100)
+                                            {
+                                                <div class="value">Deeneyimli</div>
+                                            }
+                                            @if (100<x.Point && x.Point  < 200)
+                                            {
+                                                <div class="value">Yetkin</div>
+                                            }
+                                            @if (200<x.Point)
+                                            {
+                                                <div class="value">Usta</div>
+                                            }
+                                        </a>
+                                    </div>
+                                    <div class="item">
+                                        <a href="#">
+                                            <div class="icon">
+                                                <div><a href="/Teacher/UpdateMyProfile/@x.ID">Profilimi Güncelle</a></div>
+                                                <i class="ion-chevron-right"></i>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="featured-author-quote">
+                                    <br />
+                                    @x.Graduated_school - @x.branch.Name (Mezun Olunan Okul- Branş)
+                                    <br />
+                                    @x.Mail - @x.Phone
+                                    <br />
+                                    @x.Province/@x.District - @x.Adress
+                                    <br />
+                                    @x.Work_Institution (Çalıştığı Kurum)
+                                </div>
+                                <div class="block">
+                                    <h2 class="block-title">Gönderdiğim Cevaplar</h2>
+                                    <div class="block-body">
+                                        <ul class="item-list-round" data-magnific="gallery">
+                                            @foreach (var answer in ViewBag.answers)
+                                            {
+                                                <li><a href="/Teacher/MyAnswersDetail/@answer.ID" style="background-image: url('@answer.Answer_picture');"></a></li>
+                                            }
+
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+
+            <aside>
+
+                <div class="aside-body">
+
+                </div>
+            </aside>
+            <aside>
+                <div class="aside-body">
+
+                </div>
+            </aside>
+            <aside>
+            </aside>
+            <aside>
+                <div class="aside-body">
+
+                </div>
+            </aside>
+            <aside id="sponsored">
+
+                <div class="aside-body">
+                </div>
+            </aside>
+        </div>
+    }
+    </div>
+    </div>
+    </section>
+
+    <section class="best-of-the-week">
+        <div class="container">
+            <h1>
+
+                <div class="carousel-nav" id="best-of-the-week-nav">
+
+                </div>
+            </h1>
+            <div class="owl-carousel owl-theme carousel-1">
+
+            </div>
+        </div>
+    </section>
+</body>
+<script>
+    function kapat() {
+        setTimeout("document.getElementById('dv1').style.display = 'none'", 3000);
+    }
+</script>
+

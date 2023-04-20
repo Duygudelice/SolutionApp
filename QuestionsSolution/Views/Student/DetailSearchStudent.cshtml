@@ -1,0 +1,35 @@
+﻿@using QuestionsSolution.Models
+@model List<Student>
+<h6 class="page-title">Arama Sonucu: Öğrenci Kullanıcı</h6>
+<p class="page-subtitle">Arama Sonucunda <b>@Model.Count</b> sonuç bulundu.</p>
+@foreach (var x in Model)
+{
+    <article class="col-md-12 article-list">
+        <div class="inner">
+            <figure>
+                <a href="single.html">
+                    <img src="~/Content/Style/İmages/anonim.png">
+                </a>
+            </figure>
+            <div class="details">
+                <div class="detail">
+                    <div class="category">
+                        <a href="category.html">@x.RoleName</a>
+                    </div>
+                    <div class="time">@x.Class Sınıf</div>
+                </div>
+                <h1><a href="~/Student/GetOtherStudentProfile/@x.ID">@x.Name @x.Surname</a></h1>
+                <p>
+                  @x.School
+                </p>
+                <footer>
+                  
+                    <a class="btn btn-primary more" href="~/Student/GetOtherStudentProfile/@x.ID">
+                        <div>Detayına Git</div>
+                        <div><i class="ion-ios-arrow-thin-right"></i></div>
+                    </a>
+                </footer>
+            </div>
+        </div>
+    </article>
+}

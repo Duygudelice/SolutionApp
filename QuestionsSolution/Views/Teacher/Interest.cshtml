@@ -1,0 +1,32 @@
+﻿@using QuestionsSolution.Models
+@model List<Question>
+<div class="col-md-4 sidebar" id="sidebar">
+    <aside>
+        <h1 class="aside-title">Benzer Sorular</h1>
+        <div class="aside-body">
+            @foreach (var x in Model)
+            {
+                <article class="article-fw">
+                    <div class="inner">
+                        <figure>
+                            <a href="~/Teacher/GetDetailQuestion/@x.ID">
+                                <img src="@x.Questions_picture">
+                            </a>
+                        </figure>
+                        <div class="details">
+                            <h1><a href="~/Teacher/GetDetailQuestion/@x.ID">@x.QuestionName</a></h1>
+                            <p>
+                                @x.Explanation
+                            </p>
+                            <div class="detail">
+                                <div class="time">@x.Questions_date</div>
+                                <div class="category"><a href="category.html">@x.branch.Name</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                <div class="line"></div>
+            }
+            </div>
+    </aside>
+</div>

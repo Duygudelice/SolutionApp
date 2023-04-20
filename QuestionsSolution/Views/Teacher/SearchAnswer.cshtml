@@ -1,0 +1,141 @@
+﻿@using QuestionsSolution.Models
+@using PagedList.Mvc
+@using PagedList
+@model PagedList.IPagedList<Answer>
+@{
+    ViewBag.Title = "MyAnswers";
+    Layout = "~/Views/Shared/_Layout - Teacher.cshtml";
+}
+<html>
+<body onload="kapat()">
+    <section class="search">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <aside>
+                        <h2 class="aside-title">Ara</h2>
+                        <div class="aside-body"
+                        <p>Cevap Başlığına göre cevabınızı arayın!</p>
+                        <form action="/Teacher/SearchAnswer" class="search-form">
+                            @*<form action="/Student/Ara" class="search-form">
+
+                                @using (Html.BeginForm("Ara", "Student", FormMethod.Get))
+                                {
+                                    @Html.TextBox("k", null, new { @class = "form-control", @placeholder = "Tamirci Adı İle Arayın" })
+
+
+                                }
+                            </form>*@
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" name="k" class="form-control" placeholder="Örn:Trigonometri Konusu ...">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-primary">
+                                            <i class="ion-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    </aside>
+                    <aside>
+                        <h2 class="aside-title">Filtreleme</h2>
+                        <div class="aside-body">
+                            <form class="checkbox-group" action="/Teacher/MyAnswerFilter" method="post">
+                                <label for="Name">Tarihe Göre</label>
+                                <br />
+                                @Html.CheckBox("Check1", new { @class = "form-check-input" })<span>Eskiden Yeniye<i class="bi bi-arrow-down-circle"></i></span>
+                                <br />
+                                @Html.CheckBox("Check2", new { @class = "form-check-input" })<span>Yeniden Eskiye<i class="bi bi-arrow-up-circle"></i></span>
+                                <br />
+                                <br />
+                                <button class="btn btn-primary" name="submit" type="submit" id="submit">Filtrele</button>
+
+                            </form>
+                        </div>
+                    </aside>
+                </div>
+                <div class="col-md-9">
+                    <div class="nav-tabs-group">
+
+
+                    </div>
+                    @if (@TempData["DoSearch"] != null)
+                    {
+                        <div class="search-result">
+                            Arama sonucuna @Model.Count adet sonuç bulundu.
+
+                        </div>
+                    }
+                    <div class="row">
+                        @foreach (var x in Model)
+                        {
+                            <article class="col-md-12 article-list">
+                                <div class="inner">
+                                    <figure>
+                                        <a href="~/Teacher/MyAnswersDetail/@x.ID">
+                                            <img src="@x.Answer_picture">
+                                        </a>
+                                    </figure>
+                                    <div class="details">
+                                        <div class="detail">
+                                            <div class="category">
+                                                <a href="~/Teacher/MyAnswersDetail/@x.ID">@x.AnswerName</a>
+                                            </div>
+
+                                        </div>
+
+                                        <p>@x.Answer_date</p>
+
+                                        @if (x.Answer_approval == true)
+                                        {
+                                            <a class="btn btn-success">
+
+                                                <div>Onaylanmış Cevap</div>
+                                            </a>
+                                        }
+                                        <p>
+                                            <br />
+                                            @x.Explanation
+                                        </p>
+                                        <footer>
+                                            <a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>273</div></a>
+                                            <a class="btn btn-primary more" href="~/Teacher/MyAnswersDetail/@x.ID">
+                                                <div>Detayına Git</div>
+                                                <div><i class="ion-ios-arrow-thin-right"></i></div>
+                                            </a>
+                                        </footer>
+                                    </div>
+                                </div>
+                            </article>
+                            <div class="line thin"></div>
+
+                        }
+                        <div class="col-md-12 text-center">
+                            <ul class="pagination">
+                                @Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa }))
+                            </ul>
+                            <div class="pagination-help-text">
+                                @Model.Count sonuç içerisinden 12 adet sonuç gösteriliyor. &mdash; Sayfa 1
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+    <script>
+        function kapat() {
+            setTimeout("document.getElementById('dv1').style.display = 'none'", 3000);
+        }
+    </script>
+</body>
+</html>
+

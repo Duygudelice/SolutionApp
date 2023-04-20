@@ -1,0 +1,7 @@
+﻿@model QuestionsSolution.ViewModel.SchoolViewModel
+<label for="Name">Devam Edilen Okul Seçiniz</label>
+<br />
+<br />
+<div class="form-group mt-3">
+    @Html.DropDownListFor(model => model.schoolId, Model.Schoollist, new { @class = "form-control", @id = "school", @style = "width:100%;" })
+</div>

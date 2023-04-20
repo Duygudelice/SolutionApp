@@ -1,0 +1,155 @@
+﻿@{
+    Layout =null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="Magz is a HTML5 & CSS3 magazine template is based on Bootstrap 3.">
+    <meta name="author" content="Kodinger">
+    <meta name="keyword" content="magz, html5, css3, template, magazine template">
+    <!-- Shareable -->
+    <meta property="og:title" content="HTML5 & CSS3 magazine template is based on Bootstrap 3" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="http://github.com/nauvalazhar/Magz" />
+    <meta property="og:image" content="https://raw.githubusercontent.com/nauvalazhar/Magz/master/images/preview.png" />
+    <link rel="shortcut icon" type="image/png" href="~/Content/Style/İmages/yenilogo-removebg-preview.png" />
+    <title>SolutionApp</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="~/Content/Style/Magz-master/scripts/bootstrap/bootstrap.min.css">
+    <!-- IonIcons -->
+    <link rel="stylesheet" href="~/Content/Style/Magz-master/scripts/ionicons/css/ionicons.min.css">
+    <!-- Toast -->
+    <link rel="stylesheet" href="~/Content/Style/Magz-master/scripts/toast/jquery.toast.min.css">
+    <!-- OwlCarousel -->
+    <link rel="stylesheet" href="~/Content/Style/Magz-master/scripts/owlcarousel/dist/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Content/Style/Magz-master/scripts/owlcarousel/dist/assets/owl.theme.default.min.css">
+    <!-- Magnific Popup -->
+    <link rel="stylesheet" href="~/Content/Style/Magz-master/scripts/magnific-popup/dist/magnific-popup.css">
+    <link rel="stylesheet" href="~/Content/Style/Magz-master/scripts/sweetalert/dist/sweetalert.css">
+    <!-- Custom style -->
+    <link rel="stylesheet" href="~/Content/Style/Magz-master/css/style.css">
+    <link rel="stylesheet" href="~/Content/Style/Magz-master/css/skins/all.css">
+    <link rel="stylesheet" href="~/Content/Style/Magz-master/css/demo.css">
+</head>
+<body onload="kapat()">
+    <section class="login first grey">
+        <div class="container">
+            <div class="box-wrapper">
+                <div class="box box-border">
+                    <div class="box-body">
+                        <h4>Üye Ol</h4>
+                        @if (@TempData["WrongLogin"] != null)
+                        {
+                            <div id="dv1" class="alert alert-danger">
+                                <strong style="font-size:15px;">@TempData["WrongLogin"]</strong>
+
+                            </div>}
+                        <form action="/Student/Register" method="post">
+
+                            <div class="form-group">
+                                <label>İsim</label>
+                                <input type="text" name="Name" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Soyisim</label>
+                                <input type="text" name="Surname" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Mail</label>
+                                <input type="email" name="Mail" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Telefon</label>
+                                <input type="text" name="Phone" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Doğum Tarihi</label>
+                                <input type="date" name="BirthDate" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Kimlik Numarası</label>
+                                <input type="text" name="IdentityNo" class="form-control">
+                            </div>
+                            @Html.Action("SchoolList", "Admin")
+                            <div class="form-group">
+                                <label>Devam Edilen Sınıf</label>
+                                <input type="text" name="Work_Institution" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label class="fw">Şifre</label>
+                                <input type="password" name="Password" class="form-control">
+                            </div>
+                            @Html.Action("ProvinceDistrict", "Admin")
+                            <div class="form-group">
+                                <label class="fw">Adres</label>
+                                <textarea class="form-control" name="Adress" rows="7" minlength="20" maxlength="800" placeholder="Adresiniz.." required></textarea>
+                            </div>
+                            <div class="form-group text-right">
+                                <button class="btn btn-primary btn-block">Kayıt Ol</button>
+                            </div>
+                            <div class="form-group text-center">
+                                <span class="text-muted">
+                                    Zaten hesabınız var mı?
+                                </span> <a href="~/Teacher/Login">Giriş Yap</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Footer -->
+    <!-- JS -->
+    <script src="~/Content/Style/Magz-master/js/jquery.js"></script>
+    <script src="~/Content/Style/Magz-master/js/jquery.migrate.js"></script>
+    <script src="~/Content/Style/Magz-master/scripts/bootstrap/bootstrap.min.js"></script>
+    <script>var $target_end = $(".best-of-the-week");</script>
+    <script src="~/Content/Style/Magz-master/scripts/jquery-number/jquery.number.min.js"></script>
+    <script src="~/Content/Style/Magz-master/scripts/owlcarousel/dist/owl.carousel.min.js"></script>
+    <script src="~/Content/Style/Magz-master/scripts/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
+    <script src="~/Content/Style/Magz-master/scripts/easescroll/jquery.easeScroll.js"></script>
+    <script src="~/Content/Style/Magz-master/scripts/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="~/Content/Style/Magz-master/scripts/toast/jquery.toast.min.js"></script>
+    <script src="~/Content/Style/Magz-master/js/demo.js"></script>
+    <script src="~/Content/Style/Magz-master/js/e-magz.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+    <script>
+        function kapat() {
+            setTimeout("document.getElementById('dv1').style.display = 'none'", 3000);
+        }
+        $(document).ready(function () {
+            $("#school").select2();
+            $("#provinceId").select2();
+            $("#districtId").select2();
+            $("#provinceId").change(function () {
+                var id = $(this).val();
+                console.log(id);
+                var ilçelist = $("#district");
+                ilçelist.empty();
+                $.ajax({
+                    url: '/Admin/GetDistrictList/',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: { 'id': id },
+                    success: function (data) {
+                        $.each(data, function (index, option) {
+
+                            ilçelist.append('<option value=' + data[index].Value + '>' + data[index].Text + '</option > ');
+                        });
+                        /* kurumlist.append('<option value=' + data[0].Value + '>' + data[0].Text + '</option > ');*/
+
+                    }
+                });
+
+            });
+        });
+    </script>
+</body>
+</html>

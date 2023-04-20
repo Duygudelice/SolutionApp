@@ -1,0 +1,40 @@
+﻿@model QuestionsSolution.Models.School
+@{
+    ViewBag.Title = "AddSchool";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<body onload="kapat()">
+    @if (@TempData["Error"] != null)
+    {
+        <div id="dv1" class="alert alert-danger">
+            <strong style="font-size:15px;">@TempData["Error"]</strong>
+            @*<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">x</span>
+                </button>*@
+        </div>
+    }
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Yeni Okul Ekle</h3>
+
+                @using (Html.BeginForm("AddSchool", "Admin", FormMethod.Post))
+                {
+                    <label for="Baslik">Okul Adı</label> <br />
+                    @Html.TextBoxFor(x => x.Name, new { @class = "form-control", required = "required" })
+                    <br />
+
+                    <button class="btn btn-outline-primary"><i class="mdi mdi-content-save"></i>&nbsp;&nbsp;Ekle</button>
+                }
+
+            </div>
+        </div>
+    </div>
+    <script>
+
+        function kapat() {
+            setTimeout("document.getElementById('dv1').style.display = 'none'", 3000);
+        }
+
+    </script>
+

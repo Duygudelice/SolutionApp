@@ -1,0 +1,67 @@
+﻿<section class="page">
+    <body onload="kapat()">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ol class="breadcrumb">
+                        <li><a href="#">Anasayfa</a></li>
+                        <li class="active">Bizimle İletişime Geçin</li>
+                    </ol>
+                    <h1 class="page-title">Bizimle İletişime Geçin</h1>
+                    <p class="page-subtitle">Sizi duyuyoruz!</p>
+                    <div class="line thin"></div>
+                    <div class="page-description">
+                        <div class="row">
+                            @if (@TempData["TempData"] != null)
+                            {
+                <div id="dv1" class="alert alert-success">
+                    <strong style="font-size:15px;">@TempData["TempData"]</strong>
+
+                </div>}
+                            <div class="col-md-6 col-sm-6">
+                                <h3>İletişim</h3>
+                                <p>
+                                    Her daim her zaman hizmetinizdeyiz!
+                                </p>
+                                <p>
+                                    Telefon: <span class="bold">5411891978</span> <br>
+                                    Email: <span class="bold">gdelice2244@gmail.com</span>
+                                    <br>
+                                    <br>
+                                    Ankara<br>
+                                    Türkiye
+                                </p>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <form class="row contact" id="contact-form" action="/Student/SendMessage" method="post">
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Konu</label>
+                                            <input type="text" placeholder="Zorunludur." class="form-control" name="Title">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Mesajınız <span class="required"></span></label>
+                                            <textarea class="form-control" placeholder="Zorunludur." name="Explanation" required=""></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <button class="btn btn-primary">Mesaj Gönder</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</section>
+<script>
+        function kapat() {
+            setTimeout("document.getElementById('dv1').style.display = 'none'", 3000);
+    }
+
+</script>

@@ -1,0 +1,168 @@
+﻿@using QuestionsSolution.Models
+@model List<Question>
+@{
+    ViewBag.Title = "GetDetailQuestion";
+    Layout = "~/Views/Shared/_Layout - Teacher.cshtml";
+}
+<body onload="kapat()">
+    <section class="single">
+        <div class="container">
+            <div class="row">
+                @if (@TempData["TempData"] != null)
+                {
+                    <div id="dv1" class="alert alert-success">
+                        <strong style="font-size:15px;">@TempData["TempData"]</strong>
+
+                    </div>}
+                @Html.Action("Interest", "Teacher")
+
+                <div class="col-md-8">
+                    <ol class="breadcrumb">
+                        <li><a href="~/Teacher/Index">Anasayfa</a></li>
+                        <li class="active">Soru Detayı</li>
+                    </ol>
+                    @foreach (var x in Model)
+                    {
+                        <article class="article main-article">
+                            <header>
+                                <h1>@x.QuestionName</h1>
+                                <ul class="details">
+                                    <li>Yayınlanma Tarihi @x.Questions_date</li>
+                                    <li>By <a href="#">@x.Sender_Name @x.Sender_Surname</a></li>
+                                </ul>
+                            </header>
+                            <div class="main">
+                                <p>@x.Explanation</p>
+                                <div class="featured">
+                                    <figure>
+                                        <img src="@x.Questions_picture">
+                                        <figcaption>@x.QuestionName</figcaption>
+                                    </figure>
+                                </div>
+
+                                <footer>
+                                    <div class="col">
+                                        <ul class="tags">
+                                            <li><a href="#">@x.branch.Name</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col">
+                                        <a href="#" class="love"><i class="ion-android-done"></i> <div>@x.Click</div></a>
+                                    </div>
+                                </footer>
+                        </article>
+
+                        <div class="line">
+                            <div>Soruyu Gönderen</div>
+                        </div>
+                        <div class="author">
+                            <figure>
+                                <img src="~/Content/Style/İmages/anonim.png">
+                            </figure>
+                            <div class="details">
+                                <div class="job">Öğrenci</div>
+                                <h5 class="name">@x.Sender_Name @x.Sender_Surname</h5>
+
+                            </div>
+                        </div>
+
+                    }
+                    <div class="line">
+                        <div>Cevaplar</div>
+                    </div>
+                    @Html.Action("AnswersList", "Teacher")
+                    @*<div class="comments">
+            <h2 class="title">3 Responses <a href="#">Write a Response</a></h2>
+            <div class="comment-list">
+                <div class="item">
+                    <div class="user">
+                        <figure>
+                            <img src="images/img01.jpg">
+                        </figure>
+                        <div class="details">
+                            <h5 class="name">Mark Otto</h5>
+                            <div class="time">24 Hours</div>
+                            <div class="description">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                tempor incididunt ut labore et dolore <a href="#">magna</a> aliqua. Ut enim ad minim veniam,
+                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+                            </div>
+                            <footer>
+                                <a href="#">Reply</a>
+                            </footer>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="user">
+                        <figure>
+                            <img src="images/img01.jpg">
+                        </figure>
+                        <div class="details">
+                            <h5 class="name">Mark Otto</h5>
+                            <div class="time">24 Hours</div>
+                            <div class="description">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                tempor incididunt ut labore et dolore <a href="#">magna</a> aliqua. Ut enim ad minim veniam,
+                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+                            </div>
+                            <footer>
+                                <a href="#">Reply</a>
+                            </footer>
+                        </div>
+                    </div>
+                    <div class="reply-list">
+                        <div class="item">
+                            <div class="user">
+                                <figure>
+                                    <img src="images/img01.jpg">
+                                </figure>
+                                <div class="details">
+                                    <h5 class="name">Mark Otto</h5>
+                                    <div class="time">24 Hours</div>
+                                    <div class="description">
+                                        Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                    </div>
+                                    <footer>
+                                        <a href="#">Reply</a>
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="user">
+                        <figure>
+                            <img src="images/img01.jpg">
+                        </figure>
+                        <div class="details">
+                            <h5 class="name">Mark Otto</h5>
+                            <div class="time">24 Hours</div>
+                            <div class="description">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                tempor incididunt ut labore et dolore <a href="#">magna</a> aliqua. Ut enim ad minim veniam,
+                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+                            </div>
+                            <footer>
+                                <a href="#">Reply</a>
+                            </footer>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+                    @Html.Action("SendAnswer", "Teacher")
+
+                </div>
+            </div>
+        </div>
+    </section>
+    </body>
+    <script>
+        function kapat() {
+            setTimeout("document.getElementById('dv1').style.display = 'none'", 3000);
+        }
+    </script>

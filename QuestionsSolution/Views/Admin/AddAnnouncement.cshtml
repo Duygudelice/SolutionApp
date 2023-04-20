@@ -1,0 +1,53 @@
+﻿@model QuestionsSolution.Models.Announcement
+@{
+    ViewBag.Title = "AddAnnouncement";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<body onload="kapat()">
+    @if (@TempData["Error"] != null)
+    {
+        <div id="dv1" class="alert alert-danger">
+            <strong style="font-size:15px;">@TempData["Error"]</strong>
+            @*<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">x</span>
+                </button>*@
+        </div>
+    }
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Yeni Duyuru Ekle</h3>
+
+                <form class="form-group" method="post">
+                    <label for="Vision">Duyuru Başlığı</label> <br />
+                    @Html.TextBoxFor(x => x.Title, new { @class = "form-control", required = "required" })
+                    <br />
+                    <label for="Explanation">Duyuru Açıklaması</label> <br />
+                    @Html.TextAreaFor(x => x.Explanation, new { @class = "form-control", style = "height:200px; resize:vertical;", required = "required" })
+                    <label>Duyuru Aktifliği Seçiniz</label>
+                    <br />
+                    <br />
+                    @Html.CheckBox("Check1")<span>Aktif Duyuru</span>
+                    <br />
+
+                    @Html.CheckBox("Check2")<span>Pasif Duyuru</span>
+                    <br />
+
+                    <br />
+                    <label for="Vision">Duyuru Tarihi</label> <br />
+                    @Html.TextBoxFor(x => x.Date, new { @class = "form-control", @type = "date", required = "required" })
+                    <br />
+                    <br />
+                    <br />
+                    <button class="btn btn-outline-primary"><i class="mdi mdi-content-save"></i>&nbsp;&nbsp;Ekle</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        function kapat() {
+            setTimeout("document.getElementById('dv1').style.display = 'none'", 3000);
+        }
+
+    </script>

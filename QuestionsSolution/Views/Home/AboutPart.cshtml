@@ -1,0 +1,24 @@
+﻿@using QuestionsSolution.Models
+@model List<About>
+@{
+    ViewBag.Title = "AboutPart";
+    Layout = null;
+}
+
+<section id="about" class="about section-bg">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 order-1 order-lg-2">
+                <img src="~/Content/Style/İmages/yenilogo-removebg-preview.png" style="height:97%; width:100%;" class="img-fluid" alt="SOLUTİONAPP">
+            </div>
+            <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
+                @foreach (var x in Model)
+                {
+                    @x.Explanation
+                }
+            </div>
+        </div>
+
+    </div>
+</section>

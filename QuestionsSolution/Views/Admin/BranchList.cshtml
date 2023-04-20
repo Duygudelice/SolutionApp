@@ -1,0 +1,8 @@
+﻿@model QuestionsSolution.ViewModel.BranchViewModel
+<label for="Name">Branş Seçiniz</label>
+<br />
+<br />
+<div class="form-group mt-3">
+    @Html.DropDownListFor(model => model.BranchId, Model.Branchlist, new { @class = "form-control", @id = "branch", @style = "width:100%;" })
+</div>
+

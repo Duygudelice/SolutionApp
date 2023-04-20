@@ -1,0 +1,92 @@
+﻿@using QuestionsSolution.Models
+@model List<Answer>
+<div class="comments">
+    @if (Model.Count != null)
+    {
+        <h4 class="title">@Model.Count Cevap <a href="#"></a></h4>
+    }
+    else
+    {
+        <h4 class="title">0 Cevap <a href="#"></a></h4>
+    }
+    <div class="comment-list">
+        @foreach (var answer in Model)
+        {
+            <div class="item">
+                <div class="user">
+                    <figure>
+                        <img src="~/Content/Style/İmages/anonim.png">
+                    </figure>
+                    <div class="details">
+                        <h5 class="name">@answer.Sender_Name @answer.Sender_Surname</h5>
+                        <div class="time">@answer.Answer_date</div>
+                        <br />
+                        <div class="">
+                            <img style="width:97%; height:100%;" src="@answer.Answer_picture">
+                            @*<figcaption>@x.AnswerName</figcaption>*@
+                        </div>
+                        <div class="description">
+                            @answer.Explanation
+                        </div>
+
+                    </div>
+                </div>
+                @{
+                   var comments = answer.comments.Where(x => x.Acive == true && x.IsDeleted == false && x.control==true).ToList();
+                                }
+                <div class="reply-list">
+                    @if (comments != null)
+                            {
+                                foreach (var comment in comments)
+                                {
+                            <div class="item">
+                                <div class="user">
+                                    <figure>
+                                        <img src="~/Content/Style/İmages/anonim.png">
+                                    </figure>
+                                    <div class="details">
+                                        <h5 class="name">@comment.SenderName @comment.SenderSurname</h5>
+                                        <div class="time">@comment.Date</div>
+                                        <div class="description">
+                                            @comment.Explanation
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+
+                    <footer>
+                        <a href="#">Yorum Yap</a>
+                    </footer>
+                </div>
+            </div>
+        }
+
+    </div>
+    @*<form class="row">
+            <div class="col-md-12">
+                <h3 class="title">Leave Your Response</h3>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="name">Name <span class="required"></span></label>
+                <input type="text" id="name" name="" class="form-control">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="email">Email <span class="required"></span></label>
+                <input type="email" id="email" name="" class="form-control">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="website">Website</label>
+                <input type="url" id="website" name="" class="form-control">
+            </div>
+            <div class="form-group col-md-12">
+                <label for="message">Response <span class="required"></span></label>
+                <textarea class="form-control" name="message" placeholder="Write your response ..."></textarea>
+            </div>
+            <div class="form-group col-md-12">
+                <button class="btn btn-primary">Send Response</button>
+            </div>
+        </form>*@
+</div>
+

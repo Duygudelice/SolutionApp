@@ -1,0 +1,146 @@
+﻿@using QuestionsSolution.Models
+@model List<Teacher>
+@{
+    ViewBag.Title = "UpdateMyProfile";
+    Layout = "~/Views/Shared/_Layout - Teacher.cshtml";
+}
+<section class="login grey">
+    <div class="container">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Bilgilerimi Güncelle</h3>
+
+                    <form action="/Teacher/UpdateMyProfile" method="post">
+                        @foreach (var x in Model)
+                        {
+                            <div class="form-group">
+                                <label>İsim</label>
+                                <input type="text" name="Name" value="@x.Name" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Soyisim</label>
+                                <input type="text" name="Surname" value="@x.Surname" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Mail</label>
+                                <input type="email" name="Mail" value="@x.Mail" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Telefon</label>
+                                <input type="text" name="Phone" value="@x.Phone" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Doğum Tarihi</label>
+                                <input type="date" name="BirthDate" value="@x.BirthDate" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Kimlik Numarası</label>
+                                <input type="text" name="IdentityNo" value="@x.IdentityNo" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Mezun Olunan Okul</label>
+                                <input type="text" name="Graduated_school" value="@x.Graduated_school" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Çalışılan Kurum</label>
+                                <input type="text" name="Work_Institution" value="@x.Work_Institution" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Branş</label>
+                                <input type="text" value="@x.branch.Name" class="form-control">
+                            </div>
+                            <label>Değiştirmek İçin Seçiniz</label>
+                            @Html.Action("BranchList", "Admin")
+                            <div class="form-group">
+                                <label class="fw">Şifre</label>
+                                <input type="password" name="Password" value="" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>İkamet Edilen İl ilçe</label>
+                                <input type="text" value="@x.Province/@x.District" class="form-control">
+                            </div>
+                            <label>Değiştirmek İçin Seçiniz</label>
+                            @Html.Action("ProvinceDistrict", "Admin")
+                            <div class="form-group">
+                                <label class="fw">Adres</label>
+                                <textarea class="form-control" value="@x.Adress" name="Adress" rows="7" minlength="5" maxlength="800" placeholder="Adresiniz.." required>@x.Adress</textarea>
+                            </div>
+                            <div class="form-group text-right">
+                                <button class="btn btn-primary btn-block">Güncelle</button>
+                            </div>
+                        }
+                    </form>
+
+                    @*@using (Html.BeginForm("NewQuestion", "Student", FormMethod.Post))
+                        {
+                            <label for="Baslik">Soru Başlığı</label> <br />
+                            @Html.TextBoxFor(x => x.QuestionName, new { @class = "form-control" })
+                            <br />
+                            <label for="Baslik">Soru Açıklaması</label> <br />
+                            @Html.TextAreaFor(x => x.Explanation, new { @class = "form-control", style = "height:200px; resize:vertical;" })
+                            <br />
+                            <label for="Name">Soru Fotoğrafı Seçiniz.<b>(Zorunlu Değildir.)</b></label> <br />
+                            <br />
+                            <input class=" form-control" type="file" name="Questions_picture" />
+                            <br />
+                            <br />
+
+                            @Html.Action("BranchList", "Admin")
+                            @Html.Action("UrgencyList", "Admin")
+                            <br />
+                            <button class="btn btn-outline-primary"><i class="mdi mdi-content-save"></i>&nbsp;&nbsp;Ekle</button>
+                        }*@
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="~/Content/Style/Magz-master/js/jquery.js"></script>
+<script src="~/Content/Style/Magz-master/js/jquery.migrate.js"></script>
+<script src="~/Content/Style/Magz-master/scripts/bootstrap/bootstrap.min.js"></script>
+<script>var $target_end = $(".best-of-the-week");</script>
+<script src="~/Content/Style/Magz-master/scripts/jquery-number/jquery.number.min.js"></script>
+<script src="~/Content/Style/Magz-master/scripts/owlcarousel/dist/owl.carousel.min.js"></script>
+<script src="~/Content/Style/Magz-master/scripts/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
+<script src="~/Content/Style/Magz-master/scripts/easescroll/jquery.easeScroll.js"></script>
+<script src="~/Content/Style/Magz-master/scripts/sweetalert/dist/sweetalert.min.js"></script>
+<script src="~/Content/Style/Magz-master/scripts/toast/jquery.toast.min.js"></script>
+<script src="~/Content/Style/Magz-master/js/demo.js"></script>
+<script src="~/Content/Style/Magz-master/js/e-magz.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+<script>
+    function kapat() {
+        setTimeout("document.getElementById('dv1').style.display = 'none'", 3000);
+    }
+    $(document).ready(function () {
+        $("#school").select2();
+        $("#provinceId").select2();
+        $("#districtId").select2();
+        $("#provinceId").change(function () {
+            var id = $(this).val();
+            console.log(id);
+            var ilçelist = $("#district");
+            ilçelist.empty();
+            $.ajax({
+                url: '/Admin/GetDistrictList/',
+                type: 'POST',
+                dataType: 'json',
+                data: { 'id': id },
+                success: function (data) {
+                    $.each(data, function (index, option) {
+
+                        ilçelist.append('<option value=' + data[index].Value + '>' + data[index].Text + '</option > ');
+                    });
+                    /* kurumlist.append('<option value=' + data[0].Value + '>' + data[0].Text + '</option > ');*/
+
+                }
+            });
+
+        });
+    });
+</script>

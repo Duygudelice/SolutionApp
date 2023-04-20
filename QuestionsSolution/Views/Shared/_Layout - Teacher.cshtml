@@ -1,0 +1,252 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="Magz is a HTML5 & CSS3 magazine template is based on Bootstrap 3.">
+    <meta name="author" content="Kodinger">
+    <meta name="keyword" content="magz, html5, css3, template, magazine template">
+    <!-- Shareable -->
+    <meta property="og:title" content="HTML5 & CSS3 magazine template is based on Bootstrap 3" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="http://github.com/nauvalazhar/Magz" />
+    <meta property="og:image" content="https://raw.githubusercontent.com/nauvalazhar/Magz/master/images/preview.png" />
+    <link rel="shortcut icon" type="image/png" href="~/Content/Style/İmages/yenilogo-removebg-preview.png" />
+    <title>SolutionApp</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="~/Content/Style/Magz-master/scripts/bootstrap/bootstrap.min.css">
+    <!-- IonIcons -->
+    <link rel="stylesheet" href="~/Content/Style/Magz-master/scripts/ionicons/css/ionicons.min.css">
+    <!-- Toast -->
+    <link rel="stylesheet" href="~/Content/Style/Magz-master/scripts/toast/jquery.toast.min.css">
+    <!-- OwlCarousel -->
+    <link rel="stylesheet" href="~/Content/Style/Magz-master/scripts/owlcarousel/dist/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Content/Style/Magz-master/scripts/owlcarousel/dist/assets/owl.theme.default.min.css">
+    <!-- Magnific Popup -->
+    <link rel="stylesheet" href="~/Content/Style/Magz-master/scripts/magnific-popup/dist/magnific-popup.css">
+    <link rel="stylesheet" href="~/Content/Style/Magz-master/scripts/sweetalert/dist/sweetalert.css">
+    <!-- Custom style -->
+    <link rel="stylesheet" href="~/Content/Style/Magz-master/css/style.css">
+    <link rel="stylesheet" href="~/Content/Style/Magz-master/css/skins/all.css">
+    <link rel="stylesheet" href="~/Content/Style/Magz-master/css/demo.css">
+</head>
+
+<body>
+    <header class="primary">
+        <div class="firstbar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-12">
+                        <div class="brand">
+                            <a href="~/Teacher/Index">
+                                <img src="~/Content/Style/İmages/yenilogo-removebg-preview.png" alt="SolutionApp Logo">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <form action="/Teacher/DetailSearch"  class="search" autocomplete="off">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" name="k" class="form-control" placeholder="Burada bir şey aratın..">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-primary"><i class="ion-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            @*<div class="help-block">
+                                    <div>Popular:</div>
+                                    <ul>
+                                        <li><a href="#">HTML5</a></li>
+                                        <li><a href="#">CSS3</a></li>
+                                        <li><a href="#">Bootstrap 3</a></li>
+                                        <li><a href="#">jQuery</a></li>
+                                        <li><a href="#">AnguarJS</a></li>
+                                    </ul>
+                                </div>*@
+                        </form>
+                    </div>
+                    <div class="col-md-3 col-sm-12 text-right">
+                        <ul class="nav-icons">
+                            <li><a href="~/Teacher/Logout"><i class="ion-person"></i><div>Çıkıs Yap</div></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Start nav -->
+        <nav class="menu">
+            <div class="container">
+                <div class="brand">
+                    <a href="#">
+                        <img src="images/logo.png" alt="Magz Logo">
+                    </a>
+                </div>
+                <div class="mobile-toggle">
+                    <a href="#" data-toggle="menu" data-target="#menu-list"><i class="ion-navicon-round"></i></a>
+                </div>
+                <div class="mobile-toggle">
+                    <a href="#" data-toggle="sidebar" data-target="#sidebar"><i class="ion-ios-arrow-left"></i></a>
+                </div>
+                <div id="menu-list">
+                    <ul class="nav-list">
+                        <li class="for-tablet nav-title"><a>Menu</a></li>
+                        <li class="for-tablet"><a href="login.html">Login</a></li>
+                        <li class="for-tablet"><a href="register.html">Register</a></li>
+                        <li><a href="~/Teacher/Index">Anasayfa</a></li>
+                        @*<li class="dropdown magz-dropdown">
+                                <a href="~/Student/NewQuestion">Sende Soru Sor<i class="ion-ios-arrow-right"></i></a>
+                            </li>*@
+                        <li class="dropdown magz-dropdown">
+                            <a href="~/Teacher/SendMessage">Mesaj iletin <i class="ion-ios-arrow-right"></i></a>
+                            @*<ul class="dropdown-menu">
+                                    <li><a href="category.html">Internet</a></li>
+                                    <li class="dropdown magz-dropdown">
+                                        <a href="category.html">Troubleshoot <i class="ion-ios-arrow-right"></i></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="category.html">Software</a></li>
+                                            <li class="dropdown magz-dropdown">
+                                                <a href="category.html">Hardware <i class="ion-ios-arrow-right"></i></a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="category.html">Main Board</a></li>
+                                                    <li><a href="category.html">RAM</a></li>
+                                                    <li><a href="category.html">Power Supply</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="category.html">Brainware</a>
+                                        </ul>
+                                    </li>
+                                    <li><a href="category.html">Office</a></li>
+                                    <li class="dropdown magz-dropdown">
+                                        <a href="#">Programming <i class="ion-ios-arrow-right"></i></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="category.html">Web</a></li>
+                                            <li class="dropdown magz-dropdown">
+                                                <a href="category.html">Mobile <i class="ion-ios-arrow-right"></i></a>
+                                                <ul class="dropdown-menu">
+                                                    <li class="dropdown magz-dropdown">
+                                                        <a href="category.html">Hybrid <i class="ion-ios-arrow-right"></i></a>
+                                                        <ul class="dropdown-menu">
+                                                            <li><a href="#">Ionic Framework 1</a></li>
+                                                            <li><a href="#">Ionic Framework 2</a></li>
+                                                            <li><a href="#">Ionic Framework 3</a></li>
+                                                            <li><a href="#">Framework 7</a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li><a href="category.html">Native</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="category.html">Desktop</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>*@
+                        </li>
+                        <li class="dropdown magz-dropdown magz-dropdown-megamenu">
+                            <a href="~/Teacher/MyProfile">Benim Profilim></a>
+                        </li>
+                        <li class="dropdown magz-dropdown magz-dropdown-megamenu">
+                            <a href="~/Teacher/MyAnswers">Cevaplarım<i class="ion-ios-arrow-right"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- End nav -->
+    </header>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    @RenderBody()
+
+    <!-- Start footer -->
+<footer class="footer">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 col-sm-6 col-xs-6">
+                <div class="block">
+
+                </div>
+            </div>
+            <div class="col-md-7 col-xs-12 col-sm-6">
+                <div class="block">
+                    <h1 class="block-title">Bizi Takip Edin</h1>
+                    <div class="block-body">
+
+                        <ul class="social trp">
+                            <li>
+                                <a href="#" class="facebook">
+                                    <svg><rect width="0" height="0" /></svg>
+                                    <i class="ion-social-facebook"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="twitter">
+                                    <svg><rect width="0" height="0" /></svg>
+                                    <i class="ion-social-twitter-outline"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="youtube">
+                                    <svg><rect width="0" height="0" /></svg>
+                                    <i class="ion-social-youtube-outline"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="instagram">
+                                    <svg><rect width="0" height="0" /></svg>
+                                    <i class="ion-social-instagram-outline"></i>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#" class="linkedin">
+                                    <svg><rect width="0" height="0" /></svg>
+                                    <i class="ion-social-linkedin"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="copyright">
+                    TELİF HAKKI &copy; SOLUTİONAPP 2023. Tüm Hakları Saklıdır.
+                    <div>
+                        Made with <i class="ion-heart"></i> by <a href="http://kodinger.com">Duygu Delice</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+    <!-- End Footer -->
+    <!-- JS -->
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.migrate.js"></script>
+    <script src="scripts/bootstrap/bootstrap.min.js"></script>
+    <script>var $target_end = $(".best-of-the-week");</script>
+    <script src="scripts/jquery-number/jquery.number.min.js"></script>
+    <script src="scripts/owlcarousel/dist/owl.carousel.min.js"></script>
+    <script src="scripts/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
+    <script src="scripts/easescroll/jquery.easeScroll.js"></script>
+    <script src="scripts/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="scripts/toast/jquery.toast.min.js"></script>
+    <script src="js/demo.js"></script>
+    <script src="js/e-magz.js"></script>
+</body>
+</html>

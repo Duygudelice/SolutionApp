@@ -1,0 +1,155 @@
+﻿@using QuestionsSolution.Models
+@using PagedList.Mvc
+@using PagedList
+@model PagedList.IPagedList<Question>
+
+@{
+    ViewBag.Title = "LastAdded";
+    Layout = "~/Views/Shared/_Layout - Teacher.cshtml";
+}
+
+<section class="search">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <aside>
+                    <h2 class="aside-title">Ara</h2>
+                    <div class="aside-body"
+                       <p>Soru Başlığına göre takıldığınız soruyu arayın!</p>
+                        <form action="/Teacher/Search" class="search-form">
+                            @*<form action="/Student/Ara" class="search-form">
+
+                                @using (Html.BeginForm("Ara", "Student", FormMethod.Get))
+                                {
+                                    @Html.TextBox("k", null, new { @class = "form-control", @placeholder = "Tamirci Adı İle Arayın" })
+
+
+                                }
+                            </form>*@
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" name="k" class="form-control" placeholder="Örn:Sin90 kaçtır?">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-primary">
+                                            <i class="ion-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </aside>
+                <aside>
+                    <h2 class="aside-title">Filtreleme</h2>
+                    <div class="aside-body">
+                        <form class="checkbox-group" action="/Teacher/Filter" method="post">
+                            <label for="Name">Aciliyete Göre</label> <br />
+                            @Html.CheckBox("Check1", new { @class = "form-check-input" })<span>Çok Acil&nbsp;<i class="bi bi-car-front"></i></span>
+                            <br />
+                            @Html.CheckBox("Check2", new { @class = "form-check-input" })<span>Acil &nbsp;<i class="bi bi-bicycle"></i></span>
+                            <br />
+                            @Html.CheckBox("Check3", new { @class = "form-check-input" })<span>Acil Değil<i class="bi bi-arrow-down-circle"></i></span>
+                            <br />
+                            <br />
+                            <label for="Name">Tarihe Göre</label>
+                            <br />
+                            @Html.CheckBox("Check4", new { @class = "form-check-input" })<span>Eskiden Yeniye<i class="bi bi-arrow-down-circle"></i></span>
+                            <br />
+                            @Html.CheckBox("Check5", new { @class = "form-check-input" })<span>Yeniden Eskiye<i class="bi bi-arrow-up-circle"></i></span>
+                            <br />
+                            <br />
+                            <label for="Name">Popülerliğe Göre</label>
+                            <br />
+                            @Html.CheckBox("Check6", new { @class = "form-check-input" })<span>En Azdan En Çoka<i class="bi bi-arrow-down-circle"></i></span>
+                            <br />
+                            @Html.CheckBox("Check7", new { @class = "form-check-input" })<span>En Çoktan En Aza<i class="bi bi-arrow-up-circle"></i></span>
+                            <br />
+                            <br />
+                            <label for="Name">Branşa Göre</label>
+                            @Html.Action("BranchList", "Admin")
+
+                            <button class="btn btn-primary" name="submit" type="submit" id="submit">Filtrele</button>
+
+                        </form>
+                    </div>
+                </aside>
+            </div>
+            <div class="col-md-9">
+                <div class="nav-tabs-group">
+                    <ul class="nav-tabs-list">
+                        <li><a href="~/Teacher/Index">Tümü</a></li>
+                        <li class="active"><a href="~/Teacher/LastAdded">Son Eklenen</a></li>
+                        @*<li><a href="~/Teacher/Popular">Popüler</a></li>*@
+                        <li><a href="~/Teacher/MostClicked">En Çok Tıklanan</a></li>
+                        <li><a href="~/Teacher/MostAnswered">En Çok Cevaplanan</a></li>
+                    </ul>
+                   
+                </div>
+               
+                <div class="row">
+                    @foreach (var x in Model)
+                    {
+                        <article class="col-md-12 article-list">
+                            <div class="inner">
+                                <figure>
+                                    <a href="~/Teacher/GetDetailQuestion/@x.ID">
+                                        <img src="@x.Questions_picture">
+                                    </a>
+                                </figure>
+                                <div class="details">
+                                    <div class="detail">
+                                        <div class="category">
+                                            <a href="~/Teacher/GetDetailQuestion/@x.ID">@x.QuestionName</a>
+                                        </div>
+                                    </div>
+
+                                    <p>@x.branch.Name</p>
+                                    @if (@x.urgencyId == 1)
+                                    {
+                                        <a class="btn btn-danger" href="">
+                                            <div>@x.urgency.Name</div>
+                                        </a>
+                                    }
+                                    @if (@x.urgencyId == 2)
+                                    {
+                                        <a class="btn btn-warning" href="">
+                                            <div>@x.urgency.Name</div>
+                                        </a>
+                                    }
+                                    @if (@x.urgencyId == 3)
+                                    {
+                                        <a class="btn btn-info" href="">
+                                            <div>@x.urgency.Name</div>
+                                        </a>
+                                    }
+                                    <h1><a href="single.html">@x.Sender_Name-@x.Sender_Surname</a></h1>
+                                    <p>
+                                        @x.Explanation
+                                    </p>
+                                    <footer>
+                                        <a href="#" class="love"><i class="ion-android-done"></i> <div>@x.Click</div></a>
+                                        <a class="btn btn-primary more" href="~/Teacher/GetDetailQuestion/@x.ID">
+                                            <div>Detayına Git</div>
+                                            <div><i class="ion-ios-arrow-thin-right"></i></div>
+                                        </a>
+                                    </footer>
+                                </div>
+                            </div>
+                        </article>
+                        <div class="line thin"></div>
+                    }
+                    <div class="col-md-12 text-center">
+                        <ul class="pagination">
+                            @Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa }))
+                        </ul>
+                        <div class="pagination-help-text">
+                            @Model.Count sonuç içerisinden 12 adet sonuç gösteriliyor. &mdash; Sayfa 1
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

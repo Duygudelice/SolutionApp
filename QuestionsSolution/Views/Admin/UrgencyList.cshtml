@@ -1,0 +1,9 @@
+﻿@model QuestionsSolution.ViewModel.UrgencyViewModel
+<label for="Name">Önemlilik Derecesi Seçiniz</label>
+<br />
+<br />
+<div class="form-group mt-3">
+    @Html.DropDownListFor(model => model.UrgencyId, Model.Urgencylist, new { @class = "form-control", @id = "urgency", @style = "width:100%;" })
+</div>
+
+

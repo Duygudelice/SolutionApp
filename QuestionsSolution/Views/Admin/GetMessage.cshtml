@@ -1,0 +1,63 @@
+﻿@model QuestionsSolution.Models.Message
+@{
+    ViewBag.Title = "GetMessage";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+
+            @using (Html.BeginForm("UpdateMessage", "Admin", FormMethod.Post))
+            {
+                <label for="Vision">Id</label> <br />
+                @Html.TextBoxFor(x => x.ID, new { @class = "form-control", @readonly = "readonly" })
+                <br />
+                <label for="Vision">Mesaj Gönderen Ad:</label> <br />
+                @Html.TextBoxFor(x => x.SenderName, new { @class = "form-control", @readonly = "readonly" })
+                <br />
+                <label for="Vision">Mesaj Gönderen Soyad:</label> <br />
+                @Html.TextBoxFor(x => x.SenderSurname, new { @class = "form-control", @readonly = "readonly" })
+                <br />
+                <br />
+                <label for="Vision">Mesaj Gönderen Mail:</label> <br />
+                @Html.TextBoxFor(x => x.SenderMail, new { @class = "form-control", @readonly = "readonly" })
+                <br />
+                <br />
+                <label for="Vision">Mesaj Gönderim Nedeni:</label> <br />
+                @Html.TextBoxFor(x => x.Title, new { @class = "form-control", @readonly = "readonly" })
+                <br />
+                <br />
+                <label for="Name">Mesaj Aktifliği</label>
+                <br />
+                if (Model.Active == true)
+                {
+                    <input class="form-control" type="text" value="Aktif Mesaj">
+                }
+                else
+                {
+                    <input class="form-control" type="text" value="Pasif Mesaj">
+                }
+                <br>
+                @*@Html.TextBoxFor(x => x.Active, new { @class = "form-control" })*@
+                <br />
+                <label>Aktifliği Değiştiriniz</label>
+                <br />
+                <br />
+                @Html.CheckBox("Check1")<span>Aktif</span>
+                <br />
+                <br />
+                @Html.CheckBox("Check2")<span>Pasif</span>
+                <br />
+                <br />
+                <label for="Vision">Mesaj:</label> <br />
+                @Html.TextAreaFor(x => x.Explanation, new { @class = "form-control", @readonly = "readonly", style = "height:200px; resize:vertical;" })
+                <br />
+                <br />
+                <button class="btn btn-outline-warning"><i class="mdi mdi-content-save"></i>&nbsp;&nbsp;Güncelle</button>
+            }
+            <br />
+            <br />
+        </div>
+    </div>
+</div>

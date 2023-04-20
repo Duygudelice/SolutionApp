@@ -1,0 +1,120 @@
+﻿@using QuestionsSolution.Models
+@model List<Student>
+@{
+    ViewBag.Title = "GetOtherStudentProfile";
+    Layout = "~/Views/Shared/_Layout - Teacher.cshtml";
+}
+
+
+<body onload="kapat()">
+    @foreach (var x in Model)
+    {
+        <div class="col-xs-6 col-md-12 sidebar" id="sidebar">
+            <div class="sidebar-title for-tablet">Sidebar</div>
+            <aside>
+                <div class="aside-body">
+                    <div class="featured-author">
+                        <div class="featured-author-inner">
+                            <div class="featured-author-cover" style="background-image: url('../../Content/Style/İmages/arkaplan.jpg'); ">
+
+                                @*<div class="badges">
+                                        <div class="badge-item"><i class="ion-star"></i> Featured</div>
+                                    </div>*@
+                                <div class="featured-author-center">
+                                    <figure class="featured-author-picture">
+                                        <img src="~/Content/Style/İmages/anonim.png" alt="Sample Article">
+                                    </figure>
+                                    <div class="featured-author-info">
+                                        <h2 class="name">@x.Name @x.Surname</h2>
+                                        <div class="desc">@x.Mail</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="featured-author-body">
+                                <div class="featured-author-count">
+                                    <div class="item">
+                                        <a href="#">
+                                            <div class="name">Sorulan Soru Sayısı</div>
+                                            <div class="value">@ViewBag.question</div>
+                                        </a>
+                                    </div>
+                                    <div class="item">
+                                        <a href="#">
+                                            <div class="name">Alınan Cevap Sayısı</div>
+                                            <div class="value">@ViewBag.question</div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="featured-author-quote">
+                                    @x.School - @x.Class Sınıf
+                                    <br />
+                                    @x.Mail - @x.Phone
+                                    <br />
+                                    @x.Province/@x.District - @x.Adress
+
+                                </div>
+                                @*<div class="block">
+                                        <h2 class="block-title">Sorduğum Sorular</h2>
+                                        <div class="block-body">
+                                            <ul class="item-list-round" data-magnific="gallery">
+                                                @foreach (var question in ViewBag.questions)
+                                                {
+                                                    <li><a href="/Student/AnswerApproval/@qu.ID" style="background-image: url('@question.Questions_picture');"></a></li>
+                                                }
+
+                                            </ul>
+                                        </div>
+                                    </div>*@
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+
+            <aside>
+
+                <div class="aside-body">
+
+                </div>
+            </aside>
+            <aside>
+                <div class="aside-body">
+
+                </div>
+            </aside>
+            <aside>
+            </aside>
+            <aside>
+                <div class="aside-body">
+
+                </div>
+            </aside>
+            <aside id="sponsored">
+
+                <div class="aside-body">
+                </div>
+            </aside>
+        </div>
+    }
+    </div>
+    </div>
+    </section>
+
+    <section class="best-of-the-week">
+        <div class="container">
+            <h1>
+
+                <div class="carousel-nav" id="best-of-the-week-nav">
+
+                </div>
+            </h1>
+            <div class="owl-carousel owl-theme carousel-1">
+
+            </div>
+        </div>
+    </section>
+</body>
+
+

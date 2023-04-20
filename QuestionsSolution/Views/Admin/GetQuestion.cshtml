@@ -1,0 +1,127 @@
+﻿@model QuestionsSolution.Models.Question
+@{
+    ViewBag.Title = "GetQuestion";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Gelen Soru Güncelle</h4>
+
+
+            <form action="/Admin/UpdateQuestion" method="post" enctype="multipart/form-data">
+                <label for="Id">Id</label>
+                <br />
+                <br />
+                <input class="form-control" type="text" id="Id" readonly="readonly" name="ID" value="@Model.ID">
+                <br />
+                <label for="Id">Soru Başlığı</label>
+                <br />
+                <br />
+                <input class="form-control" type="text" id="TamirciAdı" name="QuestionName" value="@Model.QuestionName">
+                <br />
+                <label for="Name">Gönderen Adı</label>
+                <br />
+                <br />
+                <input class="form-control" type="text" id="Tamirci_İl" name="Sender_Name" value="@Model.Sender_Name">
+                <br />
+                <label for="Name">Gönderen Soyadı</label>
+                <br />
+                <br />
+                <input class="form-control" type="text" id="Tamirci_İl" name="Sender_Surname" value="@Model.Sender_Surname">
+                <br />
+                <br />
+
+                <label for="PictureUrl">Gönderen Mail Adresi</label>
+                <br />
+                <br />
+                <input class="form-control" type="text" id="TamirciMail" name="Sender_Mail" value="@Model.Sender_Mail"> <br />
+                <br />
+
+                @Html.Action("BranchList", "Admin")
+                <br />
+                @Html.Action("UrgencyList", "Admin")
+                <label for="Active">Var Olan Soru Aktifliği</label>
+                <br />
+                <br />
+                @if (Model.Question_active == true)
+                {
+                    <input class="form-control" type="text" value="Aktif Soru">
+                }
+                else
+                {
+                    <input class="form-control" type="text" value="Pasif Soru">
+                }
+                <br>
+                @*@Html.TextBoxFor(x => x.Active, new { @class = "form-control" })*@
+                <br />
+                <label>Aktifliği Değiştiriniz</label>
+                <br />
+                <br />
+                @Html.CheckBox("Check1")<span>Aktif</span>
+                <br />
+                <br />
+                @Html.CheckBox("Check2")<span>Pasif</span>
+                <br />
+                <br />
+                <br />
+                <label for="PictureUrl">Soru Açıklaması</label>
+                <br />
+                <br />
+                <textarea class="form-control" id="Tamirci_Tanım" style="width:100%; height:200px;" name="Explanation">@Model.Explanation</textarea> <br />
+                <br />
+                <label for="PictureUrl">Soru Var Olan Foroğraf</label>
+                <br />
+                <br />
+                <img width="200" height="200" name="Questions_picture" alt="@Model.QuestionName" src="@Model.Questions_picture" />
+                <br />
+                <br />
+                <label for="Questions_picture">Güncellemek için seçiniz.</label>
+                <br />
+                <input class="form-control" type="file" name="Questions_picture" />
+                <br />
+                <br />
+                <button class="btn btn-outline-warning"><i class="mdi mdi-content-save"></i>&nbsp;&nbsp;Güncelle</button>
+            </form>
+            <br />
+            <br />
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+<script>
+    function kapat() {
+        setTimeout("document.getElementById('dv1').style.display = 'none'", 3000);
+    }
+    $(document).ready(function () {
+        $("#urgency").select2();
+        $("#branch").select2();
+        $("#provinceId").select2();
+        $("#district").select2();
+        $("#districtId").change(function () {
+            var id = $(this).val();
+            console.log(id);
+            var ilçelist = $("#ilçe");
+            ilçelist.empty();
+            $.ajax({
+                url: '/Tamirciler/GetInstitution/',
+                type: 'POST',
+                dataType: 'json',
+                data: { 'id': id },
+                success: function (data) {
+                    $.each(data, function (index, option) {
+
+                        ilçelist.append('<option value=' + data[index].Value + '>' + data[index].Text + '</option > ');
+                    });
+                    /* kurumlist.append('<option value=' + data[0].Value + '>' + data[0].Text + '</option > ');*/
+
+                }
+            });
+
+        });
+    });
+</script>
