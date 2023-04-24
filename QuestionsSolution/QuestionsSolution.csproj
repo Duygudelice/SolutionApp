@@ -2872,6 +2872,7 @@
     <Content Include="Views\Admin\Comment.cshtml" />
     <Content Include="Views\Admin\ArchiveComment.cshtml" />
     <Content Include="Views\Admin\GetComment.cshtml" />
+    <Content Include="Views\Student\deneme.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

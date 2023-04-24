@@ -23,7 +23,5 @@ namespace QuestionsSolution.Models
         public DbSet<Answer> Answers { get; set; }
         public DbSet<ToDo> ToDos { get; set; }
         public DbSet<Announcement> Announcements { get; set; }
-
-      
     }
 }

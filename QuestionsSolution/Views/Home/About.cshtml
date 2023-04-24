@@ -4,14 +4,11 @@
     ViewBag.Title = "About";
     Layout = "~/Views/Shared/_Layout-Home.cshtml";
 }
-
 <section id="about" class="about section-bg">
     <div class="container">
-
         <div class="section-title">
             <h2>Hakkımızda</h2>
         </div>
-
         <div class="row">
             @foreach (var x in Model)
             {
@@ -21,11 +18,6 @@
                     </div>
                     <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" style="float:left;">
                         <h4>@x.Title</h4>
-
-                        @*<p class="fst-italic">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                                magna aliqua.
-                            </p>*@
                         <p id="About" style="text-align: justify;">
                             @x.Explanation
                         </p>
@@ -34,7 +26,6 @@
                 <br />
                 <br />
                 <br />
-
             }
         </div>
         <br />

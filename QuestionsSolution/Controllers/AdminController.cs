@@ -15,6 +15,13 @@ namespace QuestionsSolution.Controllers
     {
 
         Context c = new Context();
+        [Authorize]
+        public ActionResult Questions()
+        {
+            var dgr = c.Questions.Where(x => x.IsDeleted == false).ToList();
+            c.SaveChanges();
+            return View(dgr);
+        }
         public PartialViewResult TotalMessage()
         {
             var dgr = c.Mesajlars.Where(x => x.IsDeleted == false && x.Active == true).ToList();
@@ -62,19 +69,19 @@ namespace QuestionsSolution.Controllers
         [Authorize]
         public PartialViewResult SonQuestion()
         {
-            var dgr = c.Questions.Where(x => x.IsDeleted == false && x.control == false && x.Question_active == false).Take(6).ToList();
+            var dgr = c.Questions.Where(x => x.IsDeleted == false && x.control == false && x.Question_active == false).OrderByDescending(x=>x.ID).Take(6).ToList();
             return PartialView(dgr);
         }
         [Authorize]
         public PartialViewResult SonMesaj()
         {
-            var dgr = c.Mesajlars.Where(x => x.IsDeleted == false && x.control == false && x.Active==false).Take(6).ToList();
+            var dgr = c.Mesajlars.Where(x => x.IsDeleted == false && x.control == false && x.Active==false).OrderByDescending(x => x.ID).Take(6).ToList();
             return PartialView(dgr);
         }
         [Authorize]
         public PartialViewResult SonAnswer()
         {
-            var dgr = c.Answers.Where(x => x.IsDeleted == false && x.control == false && x.Answer_active==false).Take(6).ToList();
+            var dgr = c.Answers.Where(x => x.IsDeleted == false && x.control == false && x.Answer_active==false).OrderByDescending(x => x.ID).Take(6).ToList();
             return PartialView(dgr);
         }
         [Authorize]
@@ -139,14 +146,7 @@ namespace QuestionsSolution.Controllers
             return View();
         }
 
-        [Authorize]
-        public ActionResult Questions()
-        {
-            var dgr = c.Questions.Where(x => x.IsDeleted == false).ToList();
-            //throw new Exception();
-            c.SaveChanges();
-            return View(dgr);
-        }
+  
         [Authorize]
         public ActionResult ArchiveQuestion()
         {
@@ -170,8 +170,14 @@ namespace QuestionsSolution.Controllers
             var b = c.Questions.Find(a.ID);
             b.QuestionName = a.QuestionName;
             b.Explanation = a.Explanation;
-            b.branchId = a.branchId;
-            b.urgencyId = a.urgencyId;
+            if(branch !=null)
+            {
+             b.branchId = branch.BranchId;
+            }
+            if (urgency != null)
+            {
+                b.urgencyId = urgency.UrgencyId;
+            }
             b.control =true;
             DateTime now = DateTime.Now;
             b.updatedDate = now.ToString();
@@ -367,7 +373,8 @@ namespace QuestionsSolution.Controllers
         [HttpPost]
         public ActionResult AddStudent(Student a,ProvinceDistrictViewModel province,SchoolViewModel school)
         {
-
+            DateTime now = DateTime.Now;
+            DateTime date = DateTime.Parse(a.BirthDate);
             if (a.Name == null)
             {
                 TempData["Error"] = "Öğrenci Kullanıcısı Adı alanı zorunludur!";
@@ -398,7 +405,7 @@ namespace QuestionsSolution.Controllers
                 TempData["Error"] = "Öğrenci Kullanıcısı Şifre alanı zorunludur!";
                 return View();
             }
-            if (a.BirthDate == null || a.BirthDate.Equals(DateTime.MinValue))
+            if (a.BirthDate == null || a.BirthDate.Equals(DateTime.MinValue) || date > now)
             {
                 TempData["Error"] = "Öğrenci Kullanıcısı Doğum Tarihi alanı zorunludur!";
                 return View();
@@ -446,7 +453,7 @@ namespace QuestionsSolution.Controllers
                     a.School = dgr3.Name.ToUpper();
                 }
                 a.RoleName = "Öğrenci";
-                DateTime now = DateTime.Now;
+              
                 a.createdDate = now.ToString();
                 a.IsDeleted = false;
                 c.Students.Add(a);
@@ -473,61 +480,63 @@ namespace QuestionsSolution.Controllers
         [Authorize]
         public ActionResult UpdateStudent(Student a, ProvinceDistrictViewModel province, SchoolViewModel school)
         {
+            DateTime now = DateTime.Now;
+            DateTime date = DateTime.Parse(a.BirthDate);
             if (a.Name == null)
             {
                 TempData["Error"] = "Öğrenci Kullanıcısı Adı alanı zorunludur!";
-                return View();
+                return RedirectToAction("GetStudent", "Admin");
             }
             if (a.Surname == null)
             {
                 TempData["Error"] = "Öğrenci Kullanıcısı Soyadı alanı zorunludur!";
-                return View();
+                return RedirectToAction("GetStudent", "Admin");
             }
             if (a.Mail == null)
             {
                 TempData["Error"] = "Öğrenci Kullanıcısı Mail alanı zorunludur!";
-                return View();
+                return RedirectToAction("GetStudent", "Admin");
             }
             if (a.IdentityNo == null)
             {
                 TempData["Error"] = "Öğrenci Kullanıcısı Kimlik No alanı zorunludur!";
-                return View();
+                return RedirectToAction("GetStudent", "Admin");
             }
             if (a.Phone == null)
             {
                 TempData["Error"] = "Öğrenci Kullanıcısı Telefon alanı zorunludur!";
-                return View();
+                return RedirectToAction("GetStudent", "Admin");
             }
             if (a.Password == null)
             {
                 TempData["Error"] = "Öğrenci Kullanıcısı Şifre alanı zorunludur!";
-                return View();
+                return RedirectToAction("GetStudent", "Admin");
             }
-            if (a.BirthDate == null || a.BirthDate.Equals(DateTime.MinValue))
+            if (a.BirthDate == null || a.BirthDate.Equals(DateTime.MinValue) || date > now)
             {
                 TempData["Error"] = "Öğrenci Kullanıcısı Doğum Tarihi alanı zorunludur!";
-                return View();
+                return RedirectToAction("GetStudent", "Admin"); ;
             }
             if (a.Class == null)
             {
                 TempData["Error"] = "Öğrenci Kullanıcısı Sınıf alanı zorunludur!";
-                return View();
+                return RedirectToAction("GetStudent", "Admin");
             }
             if (a.Adress == null)
             {
                 TempData["Error"] = "Öğrenci Kullanıcısı Adres alanı zorunludur!";
-                return View();
+                return RedirectToAction("GetStudent", "Admin");
             }
             if (province == null)
             {
 
                 TempData["Error"] = "İl / İlçe Seçimi zorunludur!";
-                return View();
+                return RedirectToAction("GetStudent", "Admin");
             }
             if (school == null)
             {
                 TempData["Error"] = "Okul Seçimi zorunludur!";
-                return View();
+                return RedirectToAction("GetStudent", "Admin");
             }
             var b = c.Students.Find(a.ID);
             if (province != null)
@@ -557,7 +566,7 @@ namespace QuestionsSolution.Controllers
             {
                 b.School = b.School;
             }
-            DateTime now = DateTime.Now;
+           
             b.updatedDate = now.ToString();
             b.RoleName = "Öğrenci";
             b.IdentityNo = a.IdentityNo;
@@ -636,6 +645,8 @@ namespace QuestionsSolution.Controllers
         [HttpPost]
         public ActionResult AddTeacher(Teacher a, ProvinceDistrictViewModel province, BranchViewModel branch)
         {
+            DateTime now = DateTime.Now;
+            DateTime date = DateTime.Parse(a.BirthDate);
             if (a.Name == null)
             {
                 TempData["Error"] = "Öğretmen Kullanıcısı Adı alanı zorunludur!";
@@ -666,7 +677,7 @@ namespace QuestionsSolution.Controllers
                 TempData["Error"] = "Öğretmen Kullanıcısı Şifre alanı zorunludur!";
                 return View();
             }
-            if (a.BirthDate == null || a.BirthDate.Equals(DateTime.MinValue))
+            if (a.BirthDate == null || a.BirthDate.Equals(DateTime.MinValue) || date > now)
             {
                 TempData["Error"] = "Öğretmen Kullanıcısı Doğum Tarihi alanı zorunludur!";
                 return View();
@@ -723,7 +734,7 @@ namespace QuestionsSolution.Controllers
                 a.RoleName = "Öğretmen";
                 a.Point = 0;
                 a.IsDeleted = false;
-                DateTime now = DateTime.Now;
+              
                 a.createdDate = now.ToString();
                 c.Teachers.Add(a);
                 c.SaveChanges();
@@ -747,6 +758,8 @@ namespace QuestionsSolution.Controllers
         [Authorize]
         public ActionResult UpdateTeacher(Teacher a, ProvinceDistrictViewModel province, BranchViewModel branch)
         {
+            DateTime now = DateTime.Now;
+            DateTime date = DateTime.Parse(a.BirthDate);
             if (a.Name == null)
             {
                 TempData["Error"] = "Öğretmen Kullanıcısı Adı alanı zorunludur!";
@@ -777,7 +790,7 @@ namespace QuestionsSolution.Controllers
                 TempData["Error"] = "Öğretmen Kullanıcısı Şifre alanı zorunludur!";
                 return View();
             }
-            if (a.BirthDate == null || a.BirthDate.Equals(DateTime.MinValue))
+            if (a.BirthDate == null || a.BirthDate.Equals(DateTime.MinValue) || date > now)
             {
                 TempData["Error"] = "Öğretmen Kullanıcısı Doğum Tarihi alanı zorunludur!";
                 return View();
@@ -836,7 +849,7 @@ namespace QuestionsSolution.Controllers
             {
                 b.branchId = b.branchId;
             }
-            DateTime now = DateTime.Now;
+          
             b.updatedDate = now.ToString();
             b.RoleName = "Öğretmen";
             b.IdentityNo = a.IdentityNo;

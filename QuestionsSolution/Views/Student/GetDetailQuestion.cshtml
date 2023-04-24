@@ -4,7 +4,6 @@
     ViewBag.Title = "GetDetailQuestion";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <body onload="close();">
     <section class="single">
         <div class="container">
@@ -13,7 +12,6 @@
                 {
                     <div id="dv2" class="alert alert-success">
                         <strong style="font-size:15px;">@TempData["TempData"]</strong>
-
                     </div>}
                 @Html.Action("Interest", "Student")
 
@@ -40,7 +38,6 @@
                                         <figcaption>@x.QuestionName</figcaption>
                                     </figure>
                                 </div>
-
                                 <footer>
                                     <div class="col">
                                         <ul class="tags">
@@ -52,7 +49,6 @@
                                     </div>
                                 </footer>
                         </article>
-
                         <div class="line">
                             <div>Soruyu Gönderen</div>
                         </div>
@@ -63,8 +59,6 @@
                             <div class="details">
                                 <div class="job">Öğrenci</div>
                                 <h5 class="name">@x.Sender_Name @x.Sender_Surname</h5>
-
-
                             </div>
                         </div>
                     }

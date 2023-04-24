@@ -333,10 +333,11 @@ namespace QuestionsSolution.Controllers
         {
             return View();
         }
-
         [HttpPost]
         public ActionResult Register(Student student, ProvinceDistrictViewModel province, SchoolViewModel school)
         {
+            DateTime now = DateTime.Now;
+            DateTime date = DateTime.Parse(student.BirthDate);
             if (student.Name == null)
             {
                 TempData["Error"] = "Öğrenci  Adı alanı zorunludur!";
@@ -367,7 +368,7 @@ namespace QuestionsSolution.Controllers
                 TempData["Error"] = "Öğrenci  Şifre alanı zorunludur!";
                 return View();
             }
-            if (student.BirthDate == null || student.BirthDate.Equals(DateTime.MinValue))
+            if (student.BirthDate == null || student.BirthDate.Equals(DateTime.MinValue) || date > now)
             {
                 TempData["Error"] = "Öğrenci  Doğum Tarihi alanı zorunludur!";
                 return View();
@@ -408,6 +409,7 @@ namespace QuestionsSolution.Controllers
                 var encrypedPassword = crypto.Compute(student.Password);
                 student.Password = encrypedPassword;
                 student.Salt = crypto.Salt;
+                student.createdDate = now.ToString();
                 c.Students.Add(student);
                 c.SaveChanges();
                 return RedirectToAction("Login", "Student");
@@ -613,12 +615,13 @@ namespace QuestionsSolution.Controllers
             string session = Session["Mail"].ToString();
             var user = c.Students.Where(x => x.Mail == session && x.IsDeleted == false).ToList();
             var question= c.Questions.Where(x => x.Sender_Mail == session && x.IsDeleted == false && x.Question_active==true).ToList();
-            var answer = c.Questions.Where(x => x.Sender_Mail == session && x.IsDeleted == false && x.Question_active == true).ToList();
+            var answer = c.Answers.Where(x => x.Sender_Mail == session && x.IsDeleted == false && x.Answer_approval == false).ToList();
             ViewBag.question = question.Count;
             ViewBag.questions = question;
-            ViewBag.answer = answer.Count;
+            ViewBag.answer = answer;
             return View(user);
         }
+
         [HttpGet]
         public ActionResult UpdateMyProfile(int id)
         {
@@ -629,6 +632,8 @@ namespace QuestionsSolution.Controllers
         [HttpPost]
         public ActionResult UpdateMyProfile(Student student, ProvinceDistrictViewModel province, SchoolViewModel school)
         {
+            DateTime now = DateTime.Now;
+            DateTime date = DateTime.Parse(student.BirthDate);
             if (student.Name == null)
             {
                 TempData["Error"] = "Öğrenci  Adı alanı zorunludur!";
@@ -659,7 +664,7 @@ namespace QuestionsSolution.Controllers
                 TempData["Error"] = "Öğrenci  Şifre alanı zorunludur!";
                 return View();
             }
-            if (student.BirthDate == null || student.BirthDate.Equals(DateTime.MinValue))
+            if (student.BirthDate == null || student.BirthDate.Equals(DateTime.MinValue ) || date > now)
             {
                 TempData["Error"] = "Öğrenci  Doğum Tarihi alanı zorunludur!";
                 return View();
@@ -717,6 +722,7 @@ namespace QuestionsSolution.Controllers
             dgr.Adress = student.Adress;
             dgr.Mail = student.Mail;
             dgr.Phone = student.Phone;
+            dgr.updatedDate = now.ToString();
             c.SaveChanges();
                 TempData["TempData"] = "Bilgileriniz başarılı bir şekilde güncellendi.";
                 return RedirectToAction("GetProfile", "Student");

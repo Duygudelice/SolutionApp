@@ -138,6 +138,8 @@ namespace QuestionsSolution.Controllers
         [HttpPost]
         public ActionResult AddAdmin(Admin admin)
         {
+            DateTime now = DateTime.Now;
+            DateTime date = DateTime.Parse(admin.BirthDate);
 
             if (admin.Name == null)
             {
@@ -159,7 +161,7 @@ namespace QuestionsSolution.Controllers
                 TempData["Error"] = "Admin Kimlik No alanı zorunludur!";
                 return PartialView();
             }
-            if (admin.BirthDate == null || admin.BirthDate.Equals(DateTime.MinValue))
+            if (admin.BirthDate == null || admin.BirthDate.Equals(DateTime.MinValue) || date > now)
             {
                 TempData["Error"] = "Admin Doğum Tarihi alanı zorunludur!";
                 return PartialView();
@@ -182,6 +184,7 @@ namespace QuestionsSolution.Controllers
                 admin.Password = encrypedPassword;
                 admin.Salt = crypto.Salt;
                 admin.RoleName = "Admin";
+                admin.createdDate = now.ToString();
                 c.Admins.Add(admin);
                 c.SaveChanges();
                 TempData["AlertMessage"] = "Admin Bilgileri Başarı İle Eklendi";
@@ -222,6 +225,8 @@ namespace QuestionsSolution.Controllers
         }
         public ActionResult UpdateMyProfile(Admin admin)
         {
+            DateTime now = DateTime.Now;
+            DateTime date = DateTime.Parse(admin.BirthDate);
 
             if (admin.Name == null)
             {
@@ -243,7 +248,7 @@ namespace QuestionsSolution.Controllers
                 TempData["Error"] = "Admin Kimlik No alanı zorunludur!";
                 return PartialView();
             }
-            if (admin.BirthDate == null || admin.BirthDate.Equals(DateTime.MinValue))
+            if (admin.BirthDate == null || admin.BirthDate.Equals(DateTime.MinValue) || date > now)
             {
                 TempData["Error"] = "Admin Doğum Tarihi alanı zorunludur!";
                 return PartialView();
@@ -258,6 +263,7 @@ namespace QuestionsSolution.Controllers
                 TempData["Error"] = "Admin Şifre alanı zorunludur!";
                 return PartialView();
             }
+            admin.updatedDate = now.ToString();
             var b = c.Admins.Find(admin.ID);
             b.ID = admin.ID;
             b.Name = admin.Name;

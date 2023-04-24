@@ -37,7 +37,7 @@
     <link rel="stylesheet" href="~/Content/Style/Magz-master/css/demo.css">
 </head>
 
-<body>
+<body onload="kapat()">
 
     <section class="login first grey">
         <div class="container">
@@ -106,5 +106,10 @@
     <script src="~/Content/Style/Magz-master/scripts/toast/jquery.toast.min.js"></script>
     <script src="~/Content/Style/Magz-master/js/demo.js"></script>
     <script src="~/Content/Style/Magz-master/js/e-magz.js"></script>
+    <script>
+        function kapat() {
+            setTimeout("document.getElementById('dv1').style.display = 'none'", 3000);
+        }
+    </script>
 </body>
 </html>

@@ -166,24 +166,6 @@ namespace QuestionsSolution.Controllers
         public ActionResult DetailSearch(String k)
         {
             TempData["DoSearch"] = "Arama Yapıldı";
-            //if (!string.IsNullOrEmpty(k))
-            //{
-            //    var question = c.Questions.Where(a => a.Explanation.Contains(k) || a.QuestionName.Contains(k) && a.Question_active == true && a.IsDeleted == false && a.control == true).ToList();
-            //    ViewBag.questions = question;
-            //    ViewBag.questionCount = question.Count;
-            //}
-            //if (!string.IsNullOrEmpty(k))
-            //{
-            //    var students = c.Students.Where(a => a.Name.Contains(k) || a.Surname.Contains(k) && a.IsDeleted == false).ToList();
-            //    ViewBag.studentsCount = students.Count;
-            //    ViewBag.students = students;
-            //}
-            //if (!string.IsNullOrEmpty(k))
-            //{
-            //    var teachers = c.Teachers.Where(a => a.Name.Contains(k) || a.Surname.Contains(k) &&  a.IsDeleted == false).ToList();
-            //    ViewBag.teachersCount = teachers.Count;
-            //    ViewBag.teachers = teachers;
-            //}
             return View();
 
         }
@@ -240,6 +222,8 @@ namespace QuestionsSolution.Controllers
         [HttpPost]
         public ActionResult UpdateMyProfile(Teacher teacher, ProvinceDistrictViewModel province, BranchViewModel branch)
         {
+            DateTime now = DateTime.Now;
+            DateTime date = DateTime.Parse(teacher.BirthDate);
             if (teacher.Name == null)
             {
                 TempData["Error"] = "Öğretmen Kullanıcısı Adı alanı zorunludur!";
@@ -270,7 +254,7 @@ namespace QuestionsSolution.Controllers
                 TempData["Error"] = "Öğretmen Kullanıcısı Şifre alanı zorunludur!";
                 return View();
             }
-            if (teacher.BirthDate == null || teacher.BirthDate.Equals(DateTime.MinValue))
+            if (teacher.BirthDate == null || teacher.BirthDate.Equals(DateTime.MinValue) || date > now)
             {
                 TempData["Error"] = "Öğretmen Kullanıcısı Doğum Tarihi alanı zorunludur!";
                 return View();
@@ -318,7 +302,7 @@ namespace QuestionsSolution.Controllers
                 dgr.branchId = branch.BranchId;
             }
 
-
+            dgr.updatedDate = now.ToString();
             dgr.RoleName = "Öğretmen";
             var crypto = new SimpleCrypto.PBKDF2();
             var encrypedPassword = crypto.Compute(teacher.Password);
@@ -570,6 +554,8 @@ namespace QuestionsSolution.Controllers
         [HttpPost]
         public ActionResult Register(Teacher user, ProvinceDistrictViewModel province, BranchViewModel branch)
         {
+            DateTime now = DateTime.Now;
+            DateTime date = DateTime.Parse(user.BirthDate);
             if (user.Name == null)
             {
                 TempData["Error"] = "Öğretmen Kullanıcısı Adı alanı zorunludur!";
@@ -600,7 +586,7 @@ namespace QuestionsSolution.Controllers
                 TempData["Error"] = "Öğretmen Kullanıcısı Şifre alanı zorunludur!";
                 return View();
             }
-            if (user.BirthDate == null || user.BirthDate.Equals(DateTime.MinValue) )
+            if (user.BirthDate == null || user.BirthDate.Equals(DateTime.MinValue) || date > now)
             {
                 TempData["Error"] = "Öğretmen Kullanıcısı Doğum Tarihi alanı zorunludur!";
                 return View();
@@ -638,7 +624,8 @@ namespace QuestionsSolution.Controllers
                 var dgr1 = c.Provinces.Find(province.provinceId);
                 user.Province = dgr1.Name.ToUpper();
                 user.IsDeleted = false;
-                user.RoleName = "Öğretmen"; 
+                user.RoleName = "Öğretmen";
+                user.createdDate = now.ToString();
                 var crypto = new SimpleCrypto.PBKDF2();
                 var encrypedPassword = crypto.Compute(user.Password);
                 user.Password = encrypedPassword;
