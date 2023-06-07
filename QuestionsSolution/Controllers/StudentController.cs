@@ -39,7 +39,7 @@ namespace QuestionsSolution.Controllers
 
         public ActionResult LastAdded(int sayfa = 1)
         {
-            var dgr = c.Questions.Where(x => x.Question_active == true && x.control == true && x.IsDeleted == false).OrderByDescending(x => x.Questions_date).ToList().ToPagedList(sayfa, 12);
+            var dgr = c.Questions.Where(x => x.Question_active == true && x.control == true && x.IsDeleted == false).OrderByDescending(x => x.ID).ToList().ToPagedList(sayfa, 12);
             return View(dgr);
         }
 
@@ -129,11 +129,11 @@ namespace QuestionsSolution.Controllers
 
             if (check4)
             {
-                dgr = dgr.Where(x => x.IsDeleted == false && x.Question_active == true && x.control == true).OrderBy(x => x.Questions_date).ToList().ToPagedList(sayfa, 12);
+                dgr = dgr.Where(x => x.IsDeleted == false && x.Question_active == true && x.control == true).OrderBy(x => x.ID).ToList().ToPagedList(sayfa, 12);
             }
             if (check5)
             {
-                dgr = dgr.Where(x => x.IsDeleted == false && x.Question_active == true && x.control == true).OrderByDescending(x => x.Questions_date).ToList().ToPagedList(sayfa, 12);
+                dgr = dgr.Where(x => x.IsDeleted == false && x.Question_active == true && x.control == true).OrderByDescending(x => x.ID).ToList().ToPagedList(sayfa, 12);
             }
             if (check6)
             {
@@ -604,7 +604,7 @@ namespace QuestionsSolution.Controllers
         public PartialViewResult Interest(int id)
         {
             var dgr = c.Questions.Where(a => a.ID == id).FirstOrDefault();
-            var questions = c.Questions.Where(x => x.branchId == dgr.branchId && x.IsDeleted == false && x.Question_active == true && x.control == true)
+            var questions = c.Questions.Where(x => x.branchId == dgr.branchId && x.IsDeleted == false && x.Question_active == true && x.control == true && x.ID != dgr.ID)
                 .OrderByDescending(x => x.ID).Take(3).ToList();
             return PartialView(questions);
         }
@@ -615,10 +615,10 @@ namespace QuestionsSolution.Controllers
             string session = Session["Mail"].ToString();
             var user = c.Students.Where(x => x.Mail == session && x.IsDeleted == false).ToList();
             var question= c.Questions.Where(x => x.Sender_Mail == session && x.IsDeleted == false && x.Question_active==true).ToList();
-            var answer = c.Answers.Where(x => x.Sender_Mail == session && x.IsDeleted == false && x.Answer_approval == false).ToList();
+            var answer = c.Answers.Where(x => x.IsDeleted == false && x.Answer_approval == false).ToList();
             ViewBag.question = question.Count;
             ViewBag.questions = question;
-            ViewBag.answer = answer;
+            ViewBag.answer = answer.Count;
             return View(user);
         }
 
